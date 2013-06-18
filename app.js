@@ -39,7 +39,7 @@ app.get('/setWeather', function(req, res){
     res.send({'error':true, "message":"Hey, that's not cool. Only texts from Twilio please."});
   }
 });
-app.get('receiveCall', function(req, res){
+app.get('/receiveCall', function(req, res){
   //Create TwiML response
   var twiml = new twilio.TwimlResponse();
   twiml.say('Hello World!');
