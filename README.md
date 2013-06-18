@@ -4,6 +4,7 @@ Poncho Voice
 This is a simple node server that will read off the weather set by [poncho.is](http://poncho.is). You have to use your own [Twilio](http://twilio.com) number and API Key. I ain't made a' money.
 
 Installation:
+
 1.  Setup a Twilio account
 2.  Setup a Poncho.is account
 3.  Select "text message" or "email and text" in the final step, and type in you Twilio phone number
