@@ -12,7 +12,7 @@ var express = require('express')
 var app = express();
 
 app.configure(function(){
-  app.set('port', process.env.PORT || 3000);
+  app.set('port', 6006);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.favicon());
@@ -23,11 +23,17 @@ app.configure(function(){
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
+var config = require('./config.json');
+var twilio = require('twilio')(config.twilio.accountSID, config.twilio.authToken);
+
 app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
+app.get('/', function(req, res){
+  console.log('hey');
+  res.send({'success':'true'});
+});
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){
