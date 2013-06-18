@@ -1,0 +1,11 @@
+{
+	"twilio": {
+		"accountSID": "Your Twilio Account SID Here",
+		"authToken": "Your Twilio Account Token Here"
+	},
+	"phoneNumbers": [
+		"Your number",
+		"+13472547561"
+	],
+	"note":"That second number is Poncho's number, at least for me."
+}

@@ -1,12 +1,11 @@
-
-/**
- * Module dependencies.
- */
+//PONCHO VOICE
 
 var express = require('express')
   , routes = require('./routes')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , config = require('./config.json')
+  , twilio = require('twilio')
 
 var app = express();
 
@@ -22,23 +21,36 @@ app.configure(function(){
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
-var config = require('./config.json');
-var twilio = require('twilio');
-var client = twilio(config.twilio.accountSID, config.twilio.authToken);
+//Init the weather var
 var todaysWeather = "I'm waiting for the weather to be set. Get Poncho to text me.";
 
+//Sets the weather from an incoming text message
 app.get('/setWeather', function(req, res){
-  if (req.query.AccountSid == config.twilio.accountSID) {
+
+  //check to see if this is an approved number
+  if (config.phoneNumbers.indexOf(req.query.From) != -1) {
+
+    //sets the weather
     todaysWeather = req.query.Body.substring(0, req.query.Body.indexOf('poncho'));
+
+    //send confirmation for testing
     res.send({"error":false, "todaysWeather": todaysWeather});
   }
   else {
     res.send({'error':true, "message":"Hey, that's not cool. Only texts from Twilio please."});
   }
 });
+
+//Reads the weather to an incoming caller
 app.get('/receiveCall', function(req, res){
+
+  //init response
   var twiml = new twilio.TwimlResponse();
+
+  //construct the response
   twiml.say('Hi there. '+todaysWeather);
+
+  //send back
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
 });
