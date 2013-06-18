@@ -7,7 +7,7 @@ Installation:
 
 1.  Setup a Twilio account
 2.  Setup a Poncho.is account
-3.  Select "text message" or "email and text" in the final step, and type in you Twilio phone number
+3.  Select "text message" or "email and text" in the final step, and type in your Twilio phone number
 4.  `git clone http://github.com/charltoons/ponchovoice.git`
 5.  `cd ponchovoice`
 6.  `cp configSample.json config.json` Copy the sample config.json
