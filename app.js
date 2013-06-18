@@ -30,7 +30,7 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', function(req, res){
+app.get('/setWeather', function(req, res){
   if (req.query.AccountSid == config.twilio.accountSID) {
     todaysWeather = req.query.Body.substring(0, req.query.Body.indexOf('poncho'));
     res.send({"error":false, "todaysWeather": todaysWeather});
@@ -38,7 +38,14 @@ app.get('/', function(req, res){
   else {
     res.send({'error':true, "message":"Hey, that's not cool. Only texts from Twilio please."});
   }
-  
+});
+app.get('receiveCall', function(req, res){
+  //Create TwiML response
+  var twiml = new twilio.TwimlResponse();
+  twiml.say('Hello World!');
+
+  res.writeHead(200, {'Content-Type': 'text/xml'});
+  res.end(twiml.toString());
 });
 
 http.createServer(app).listen(app.get('port'), function(){
