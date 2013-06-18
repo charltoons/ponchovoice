@@ -1,7 +1,7 @@
 Poncho Voice
 ============
 
-This is a simple node server that will read off the weather set by [poncho.is](http://poncho.is). You have to use your own [Twilio](http://twilio.com) number and API Key. I ain't made a' money.
+This is a simple node server that will read off the weather set by [poncho.is](http://poncho.is). You have to use your own [Twilio](http://twilio.com) number and API Key, though. I ain't made a' money.
 
 Installation:
 
