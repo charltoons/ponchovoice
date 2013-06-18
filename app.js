@@ -25,11 +25,7 @@ app.configure(function(){
 var config = require('./config.json');
 var twilio = require('twilio');
 var client = twilio(config.twilio.accountSID, config.twilio.authToken);
-var todaysWeather = "";
-
-app.configure('development', function(){
-  app.use(express.errorHandler());
-});
+var todaysWeather = "I'm waiting for the weather to be set. Get Poncho to text me.";
 
 app.get('/setWeather', function(req, res){
   if (req.query.AccountSid == config.twilio.accountSID) {
@@ -41,10 +37,8 @@ app.get('/setWeather', function(req, res){
   }
 });
 app.get('/receiveCall', function(req, res){
-  //Create TwiML response
   var twiml = new twilio.TwimlResponse();
-  twiml.say('Hello World!');
-
+  twiml.say('Hi there. '+todaysWeather);
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
 });
