@@ -23,7 +23,8 @@ app.configure(function(){
 });
 
 var config = require('./config.json');
-var twilio = require('twilio')(config.twilio.accountSID, config.twilio.authToken);
+var twilio = require('twilio');
+var client = twilio(config.twilio.accountSID, config.twilio.authToken);
 var todaysWeather = "";
 
 app.configure('development', function(){
