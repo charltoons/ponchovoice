@@ -25,14 +25,21 @@ app.configure(function(){
 
 var config = require('./config.json');
 var twilio = require('twilio')(config.twilio.accountSID, config.twilio.authToken);
+var todaysWeather = "";
 
 app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
 app.get('/', function(req, res){
-  console.log('hey');
-  res.send({'success':'true'});
+  if (req.query.AccountSid == config.twilio.accountSID) {
+    todaysWeather = req.query.Body.substring(0, req.query.Body.indexOf('poncho'));
+    res.send({"error":false, "todaysWeather": todaysWeather});
+  }
+  else {
+    res.send({'error':true, "message":"Hey, that's not cool. Only texts from Twilio please."});
+  }
+  
 });
 app.get('/users', user.list);
 
